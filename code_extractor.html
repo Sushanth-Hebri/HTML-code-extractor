@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HTML Code Extractor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .code-container {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 20px;
+    }
+    code {
+      display: block;
+      white-space: pre;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>HTML Code Extractor</h1>
+  <input type="file" id="fileInput" accept=".html" />
+  <div class="code-container" id="codeContainer">
+    <code id="codeDisplay">Choose an HTML file to display its code.</code>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const codeContainer = document.getElementById('codeContainer');
+    const codeDisplay = document.getElementById('codeDisplay');
+
+    fileInput.addEventListener('change', handleFileSelection);
+
+    function handleFileSelection(event) {
+      const file = event.target.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (event) {
+          const fileContent = event.target.result;
+          codeDisplay.textContent = fileContent;
+        };
+
+        reader.readAsText(file);
+      } else {
+        codeDisplay.textContent = 'Choose an HTML file to display its code.';
+      }
+    }
+  </script>
+</body>
+</html>
